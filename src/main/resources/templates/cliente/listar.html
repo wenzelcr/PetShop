@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/doc/tutorials/2.1/usingthymeleaf.html">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Clientes</title>
+</head>
+<body>
+    <li th:each=" cli : ${clientes} ">
+        <span th:text="${cli.nome}"></span>
+        -
+        <span th:text="${cli.cpf}"></span>
+    </li>
+</body>
+</html>
