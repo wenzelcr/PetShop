@@ -29,9 +29,9 @@ public class ClienteRepository {
         return jdbcTemplate.query("select id, nome, cpf, nascimento from cliente", new ClienteRowMapper());
     }
 
-    public void delete(String nome) {
+    public void delete(Long id) {
 
-        jdbcTemplate.update("delete from cliente where nome = ?", nome);
+        jdbcTemplate.update("delete from cliente where id = ?", id);
     }
 
 }

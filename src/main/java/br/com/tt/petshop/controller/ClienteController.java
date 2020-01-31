@@ -44,8 +44,8 @@ public class ClienteController {
     }
 
     @RequestMapping("/admin/cliente/excluir")
-    public String excluir(@RequestParam String nome){
-        this.clienteService.excluir(nome);
+    public String excluir(@RequestParam Long id){
+        this.clienteService.excluir(id);
         return "redirect:/admin/cliente/listar";
     }
 

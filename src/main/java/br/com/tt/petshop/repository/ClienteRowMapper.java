@@ -12,7 +12,7 @@ public class ClienteRowMapper implements RowMapper<Cliente> {
         Cliente cliente = new Cliente();
         cliente.setNome(rs.getString("nome"));
         cliente.setCpf(rs.getString("cpf"));
-        cliente.setNascimento(rs.getString("nascimento"));
+        cliente.setNascimento(rs.getDate("nascimento").toLocalDate());
         return cliente;
     }
 }

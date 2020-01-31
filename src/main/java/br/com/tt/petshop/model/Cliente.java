@@ -1,11 +1,22 @@
 package br.com.tt.petshop.model;
 
 
+import org.apache.tomcat.jni.Local;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.time.LocalDate;
+
 public class Cliente {
+    private Long id;
     private String nome;
     private String cpf;
     //TODO converter para localdate
-    private String nascimento;
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    private LocalDate nascimento;
+
+    public Long getId() {
+        return id;
+    }
 
     public String getNome() {
         return nome;
@@ -23,11 +34,11 @@ public class Cliente {
         this.cpf = cpf;
     }
 
-    public String getNascimento() {
+    public LocalDate getNascimento() {
         return nascimento;
     }
 
-    public void setNascimento(String nascimento) {
+    public void setNascimento(LocalDate nascimento) {
         this.nascimento = nascimento;
     }
 }
