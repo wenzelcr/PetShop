@@ -5,6 +5,7 @@ import br.com.tt.petshop.service.UnidadeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -36,8 +37,14 @@ public class UnidadeController {
 
     @RequestMapping("/admin/unidade/limpar")
     public String limpar(Unidade unidade, Model model){
-        this.unidadeService.limpar(unidade);
+        this.unidadeService.limpar();
         return "redirect:/admin";
+    }
+
+    @RequestMapping("/admin/unidade/excluir")
+    public String excluir(@RequestParam String nome){
+        this.unidadeService.excluir(nome);
+        return "redirect:/admin/unidade/listar";
     }
 
 }

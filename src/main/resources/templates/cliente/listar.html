@@ -9,6 +9,9 @@
         <span th:text="${cli.nome}"></span>
         -
         <span th:text="${cli.cpf}"></span>
+
+        <a th:href="@{/admin/cliente/excluir(nome=${cli.nome})}">X</a>
+
     </li>
 </body>
 </html>

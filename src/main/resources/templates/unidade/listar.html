@@ -9,6 +9,8 @@
         <span th:text="${uni.nome}"></span>
         -
         <span th:text="${uni.endereco}"></span>
+
+        <a th:href="@{/admin/unidade/excluir(nome=${uni.nome})}">X</a>
     </li>
 </body>
 </html>

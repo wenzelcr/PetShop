@@ -22,6 +22,10 @@ public class UnidadeService {
         return this.unidadeRepository.findAll();
     }
 
-    public void limpar(Unidade unidade){this.unidadeRepository.limpar(unidade);}
+    public void limpar(){this.unidadeRepository.limpar();}
+
+    public void excluir(String nome) {
+        this.unidadeRepository.delete(nome);
+    }
 
 }
