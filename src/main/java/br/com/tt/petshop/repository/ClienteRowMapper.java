@@ -10,9 +10,12 @@ public class ClienteRowMapper implements RowMapper<Cliente> {
     @Override
     public Cliente mapRow(ResultSet rs, int rowNum) throws SQLException {
         Cliente cliente = new Cliente();
+        cliente.setId(rs.getLong("id"));
         cliente.setNome(rs.getString("nome"));
         cliente.setCpf(rs.getString("cpf"));
-        cliente.setNascimento(rs.getDate("nascimento").toLocalDate());
+        if( rs.getDate("nascimento")  != null ) {
+            cliente.setNascimento(rs.getDate("nascimento").toLocalDate());
+        }
         return cliente;
     }
 }
