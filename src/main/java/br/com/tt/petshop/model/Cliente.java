@@ -4,14 +4,24 @@ package br.com.tt.petshop.model;
 import org.apache.tomcat.jni.Local;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 
+@Entity
+@Table(name="Cliente")
 public class Cliente {
+
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "nome")
     private String nome;
+    @Column(name = "cpf")
     private String cpf;
     //TODO converter para localdate
     @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @Column(name = "nascimento")
     private LocalDate nascimento;
 
     public Long getId() {

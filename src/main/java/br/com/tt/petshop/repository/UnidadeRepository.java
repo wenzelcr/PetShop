@@ -3,20 +3,27 @@ import br.com.tt.petshop.model.Unidade;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.EntityManager;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 @Repository
 public class UnidadeRepository {
 
     private JdbcTemplate jdbcTemplate;
+    private EntityManager entityManager;
 
 
     private List<Unidade> db = new ArrayList<>();
 
-    public UnidadeRepository(JdbcTemplate jdbcTemplate) {
+    public UnidadeRepository(JdbcTemplate jdbcTemplate, EntityManager entityManager) {
         this.jdbcTemplate = jdbcTemplate;
+        this.entityManager = entityManager;
+    }
+
+    public Unidade update(Unidade unidade){
+        Unidade unidadeSalva = entityManager.merge(unidade);
+        return unidadeSalva;
     }
 
     public Unidade save(Unidade unidade){
