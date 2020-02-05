@@ -1,6 +1,7 @@
 package br.com.tt.petshop.model;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.apache.tomcat.jni.Local;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -22,6 +23,7 @@ public class Cliente {
     //TODO converter para localdate
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     @Column(name = "nascimento")
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate nascimento;
 
     public Long getId() {

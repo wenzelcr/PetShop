@@ -1,7 +1,9 @@
 package br.com.tt.petshop.repository;
 import br.com.tt.petshop.model.Unidade;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import java.util.ArrayList;
@@ -28,8 +30,8 @@ public class UnidadeRepository {
 
     public Unidade save(Unidade unidade){
         //db.add(unidade);
-        jdbcTemplate.update("insert into unidade(nome, endereco) values (?, ?);",
-                                 unidade.getNome(), unidade.getEndereco());
+        jdbcTemplate.update("insert into unidade(nome, endereco) values ( ?, ?);",
+                                  unidade.getNome(), unidade.getEndereco());
         return unidade;
     }
 
@@ -55,10 +57,23 @@ public class UnidadeRepository {
             }
         }
 
-        db = listaAposExclusao;
-        */
+        db = listaAposExclusao;*/
+
 
         jdbcTemplate.update("delete from unidade where nome = ?", nome);
     }
 
+    public Unidade findById(Long id) {
+        return (Unidade) entityManager.createQuery("select u from Unidade u Where u.id = :id ")
+                .setParameter("id", id)
+                .getSingleResult();
+    }
+
+    @Modifying
+    @Transactional
+    public void deletarPorId(Long id){
+        entityManager.createQuery("delete from Unidade Where id = :id")
+                .setParameter("id", id)
+                .executeUpdate();
+    }
 }

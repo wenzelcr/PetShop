@@ -28,4 +28,11 @@ public class UnidadeService {
         this.unidadeRepository.delete(nome);
     }
 
+    public void excluirPorId(Long id) {
+        this.unidadeRepository.deletarPorId(id);
+    }
+
+    public Unidade buscarPorId(Long id) {
+        return this.unidadeRepository.findById(id);
+    }
 }

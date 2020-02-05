@@ -4,6 +4,7 @@ import br.com.tt.petshop.model.Cliente;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,9 +14,11 @@ public class ClienteRepository {
     private List<Cliente> db = new ArrayList<>();
 
     private JdbcTemplate jdbcTemplate;
+    private EntityManager entityManager;
 
-    public ClienteRepository(JdbcTemplate jdbcTemplate) {
+    public ClienteRepository(JdbcTemplate jdbcTemplate, EntityManager entityManager) {
         this.jdbcTemplate = jdbcTemplate;
+        this.entityManager = entityManager;
     }
 
     public Cliente save(Cliente cliente){
@@ -34,4 +37,9 @@ public class ClienteRepository {
         jdbcTemplate.update("delete from cliente where id = ?", id);
     }
 
+    public Cliente findById(Long id) {
+        return (Cliente) entityManager.createQuery("select c from cliente where c.id = :id")
+                .setParameter("id", id)
+                .getSingleResult();
+    }
 }
