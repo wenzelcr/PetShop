@@ -2,6 +2,7 @@ package br.com.tt.petshop.controller;
 
 import br.com.tt.petshop.model.Cliente;
 import br.com.tt.petshop.service.ClienteService;
+import br.com.tt.petshop.service.NomeInvalidoException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,7 +31,7 @@ public class ClienteController {
     }
 
     @RequestMapping("/admin/cliente/salvar")
-    public String salvar(Cliente cliente, Model model){
+    public String salvar(Cliente cliente, Model model) throws NomeInvalidoException {
         this.clienteService.criar(cliente);
         //return inicial(model);
         return "redirect:/admin/cliente/listar";

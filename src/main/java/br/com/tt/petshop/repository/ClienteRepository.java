@@ -1,8 +1,10 @@
 package br.com.tt.petshop.repository;
 
 import br.com.tt.petshop.model.Cliente;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import java.util.ArrayList;
@@ -21,7 +23,14 @@ public class ClienteRepository {
         this.entityManager = entityManager;
     }
 
+    @Modifying
+    @Transactional
     public Cliente save(Cliente cliente){
+        entityManager.persist(cliente);
+        return cliente;
+    }
+
+    public Cliente saveJdbc(Cliente cliente){
         //db.add(cliente);
         jdbcTemplate.update("insert into cliente(nome, cpf, nascimento) values (?, ?, ? );",
                 cliente.getNome(), cliente.getCpf(), cliente.getNascimento());
@@ -38,7 +47,7 @@ public class ClienteRepository {
     }
 
     public Cliente findById(Long id) {
-        return (Cliente) entityManager.createQuery("select c from cliente where c.id = :id")
+        return (Cliente) entityManager.createQuery("from Cliente c Where c.id = :id")
                 .setParameter("id", id)
                 .getSingleResult();
     }

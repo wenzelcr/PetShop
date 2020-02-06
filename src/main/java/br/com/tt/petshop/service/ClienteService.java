@@ -15,8 +15,11 @@ public class ClienteService {
         this.clienteRepository = clienteRepository;
     }
 
-    public void criar(Cliente cliente){
-        this.clienteRepository.save(cliente);
+    public Cliente criar(Cliente cliente) throws NomeInvalidoException{
+        if( cliente.getNome().trim().indexOf(" ") == -1 ){
+            throw new NomeInvalidoException("Nome deve ser ao menos em duas partes.");
+        }
+        return this.clienteRepository.save(cliente);
     }
 
     public List<Cliente> listar(){
