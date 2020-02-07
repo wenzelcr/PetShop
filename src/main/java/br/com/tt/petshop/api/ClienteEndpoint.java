@@ -2,7 +2,7 @@ package br.com.tt.petshop.api;
 
 import br.com.tt.petshop.model.Cliente;
 import br.com.tt.petshop.service.ClienteService;
-import br.com.tt.petshop.service.NomeInvalidoException;
+import br.com.tt.petshop.api.exception.NomeInvalidoException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -34,16 +34,10 @@ public class ClienteEndpoint {
 
     @PostMapping
     public ResponseEntity criar(@RequestBody Cliente cliente) throws NomeInvalidoException {
-        try {
-            Cliente clientesalvo = clienteService.criar(cliente);
-            clienteService.criar(cliente);
-            URI uri = URI.create("/clientes/"+clientesalvo.getId());
-            return ResponseEntity.created(uri).build();
-        }catch(NomeInvalidoException e){
-            return ResponseEntity
-                    .status(HttpStatus.UNPROCESSABLE_ENTITY)
-                    .body(e.getMessage());
-        }
+        Cliente clientesalvo = clienteService.criar(cliente);
+        clienteService.criar(cliente);
+        URI uri = URI.create("/clientes/"+clientesalvo.getId());
+        return ResponseEntity.created(uri).build();
     }
 
     @DeleteMapping("/{id}")

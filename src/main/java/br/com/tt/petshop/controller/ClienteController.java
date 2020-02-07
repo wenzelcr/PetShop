@@ -2,7 +2,7 @@ package br.com.tt.petshop.controller;
 
 import br.com.tt.petshop.model.Cliente;
 import br.com.tt.petshop.service.ClienteService;
-import br.com.tt.petshop.service.NomeInvalidoException;
+import br.com.tt.petshop.api.exception.NomeInvalidoException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,8 +31,12 @@ public class ClienteController {
     }
 
     @RequestMapping("/admin/cliente/salvar")
-    public String salvar(Cliente cliente, Model model) throws NomeInvalidoException {
-        this.clienteService.criar(cliente);
+    public String salvar(Cliente cliente, Model model) {
+        try {
+            this.clienteService.criar(cliente);
+        } catch (NomeInvalidoException e) {
+            e.printStackTrace(); //TODO
+        }
         //return inicial(model);
         return "redirect:/admin/cliente/listar";
     }

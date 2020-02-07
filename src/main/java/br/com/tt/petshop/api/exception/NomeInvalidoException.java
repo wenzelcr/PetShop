@@ -1,4 +1,4 @@
-package br.com.tt.petshop.service;
+package br.com.tt.petshop.api.exception;
 
 public class NomeInvalidoException extends Exception {
 
