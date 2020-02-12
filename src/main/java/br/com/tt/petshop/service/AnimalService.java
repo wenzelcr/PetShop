@@ -9,7 +9,12 @@ import java.util.Optional;
 
 @Service
 public class AnimalService {
+
     private AnimalRepository animalRepository;
+
+    public Animal salvar(Animal animal) {
+        return animalRepository.save(animal);
+    }
 
     public void setAnimalRepository(AnimalRepository animalRepository) {
         this.animalRepository = animalRepository;
