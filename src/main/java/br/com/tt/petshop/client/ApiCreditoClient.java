@@ -1,6 +1,7 @@
 package br.com.tt.petshop.client;
 
 import br.com.tt.petshop.client.dto.SituacaoCreditoDto;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
@@ -8,14 +9,18 @@ import org.springframework.web.client.RestTemplate;
 public class ApiCreditoClient {
 
     private RestTemplate restTemplate;
+    private String urlCredito;
 
-    public ApiCreditoClient(RestTemplate restTemplate) {
+    public ApiCreditoClient(RestTemplate restTemplate, @Value("${app.creditoApi.url}") String urlCredito) {
         this.restTemplate = restTemplate;
+        this.urlCredito = urlCredito;
     }
 
+    //https://imersao-credito-api.herokuapp.com
+
     public SituacaoCreditoDto verificaSituacao(String cpf){
-        return restTemplate.getForObject("https://imersao-credito-api.herokuapp.com/credito/{cpf}",
+        return restTemplate.getForObject("{urlCredito}/credito/{cpf}",
                 SituacaoCreditoDto.class,
-                cpf);
+                urlCredito, cpf);
     }
 }
